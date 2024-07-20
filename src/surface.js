@@ -66,11 +66,11 @@ class Surface {
     }
 
     static descriptionForConicConstant(k) {
-        if (k == 0) { return "spherical"; }
-        else if (k > 0) { return "oblate elliptic"; }
-        else if (k < 0 && k > -1) { return "prolate elliptic"; }
-        else if (k == -1) { return "parabolic"; }
-        else if (k < -1) { return "hyperbolic"; }
+        if (k == 0) { return "球形"; }
+        else if (k > 0) { return "椭圆形扁圆"; }
+        else if (k < 0 && k > -1) { return "延椭圆形"; }
+        else if (k == -1) { return "抛物线形"; }
+        else if (k < -1) { return "双曲形"; }
     }
 
     static traceRay2D(ray_ox, ray_oy, ray_slope, medium, surface, wavelength) {

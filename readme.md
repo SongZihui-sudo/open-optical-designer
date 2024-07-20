@@ -1,162 +1,142 @@
-# Open Optical Designer
+# Open Optical Designer 中文
 
 Alexander Bock
 
-[Launch Open Optical Designer](https://alexbock.github.io/open-optical-designer/)
+[启动 Open Optical Designer](https://alexbock.github.io/open-optical-designer/)
 
-![Open Optical Designer Screenshot 2](screenshots/screenshot2.png)
-![Open Optical Designer Screenshot 1](screenshots/screenshot1.png)
+![Open Optical Designer 中文 Screenshot](screenshots/index.png)
 
-## Introduction
+## 简介
 
-This is a work-in-progress web application for
-designing optical lenses consisting of sequential lens elements.
-It is intended to support practical design of, for
-example, a large aperture double Gauss lens for a full frame camera with
-effective control of image aberrations. Support for mirrors
-and the design of reflecting telescopes is planned in the future.
+这是一个正在开发中的 web 应用程序，用于设计由连续透镜元件组成的光学透镜。
+其目的是支持实际设计，例如用于全画幅相机的大光圈双高斯镜头，可有效控制图像像差。
+有效控制图像像差。 并计划在未来支持反射镜和反射望远镜的设计。
 
-## Features
+## 功能
 
-* Full geometrical ray tracing simulated in 3D
-* Aspherical surfaces (conic constant)
-* Formula support for dynamically calculated surface properties
-* Incoming ray environment control
-* Automatic 2D cross section viewport
-* Geometric point spread function (spot diagram)
-* Display of focal length, effective f-number, and numerical aperture
-* Autofocus
-* Optical path length and phase
-* Axial and transverse chromatic aberration
-* Transverse ray aberration
-* Material database
-* Save/load designs as local JSON files
-* Import designs from ".len" files
-* Light and dark UI color schemes
+* 以 3D 形式模拟的全几何光线追踪
+* 非球面（圆锥系数）
+* 动态计算曲面属性的公式支持
+* 射入射线环境控制
+* 自动二维横截面视口
+* 几何点扩散函数（光斑图）
+* 显示焦距、有效f值和数值光圈
+* 自动对焦
+* 光路长度和相位
+* 轴向和横向色差
+* 横向射线像差
+* 材料数据库
+* 将设计保存/加载为本地 JSON 文件
+* 从“.len”文件导入设计
+* 浅色和深色用户界面配色方案
 
-## Next Development Priorities
+## 下一步开发的重点功能
 
-* Mirrors (including systems such as catadioptric telescopes)
-* Design Optimization
+* 反射镜（包括双筒望远镜等系统）
+* 设计优化
 
-## Future Plans
+## 未来计划
 
-* Generate links for sharing designs by URL
-* Example designs (achromatic doublet, double Gauss, Cooke triplet, historical lenses, etc.)
-* Design generators/wizards (singlet, achromatic doublet, telescope objective, spherical best form lens, etc.)
-* Overall surface transmission for unpolarized light
-* Field curvature
-* Distortion
-* Abbe sine condition
-* Wavefront analysis
-* Modulation transfer function graph
-* Through-the-lens scene simulation (test chart, astronomical, custom photo with optional depth map)
-* 3D design view
-* Material browser/editor
+* 通过 URL 生成用于共享设计的链接
+* 示例设计（消色差双合透镜、双高斯透镜、库克三合透镜、历史透镜等）
+* 设计生成器/向导（单透镜、消色差双合透镜、望远镜物镜、球面最佳形状透镜等）
+* 非偏振光的整体表面透射率
+* 场曲率
+* 失真
+* 阿贝正弦条件
+* 波前分析
+* 调制传递函数图
+* 通过镜头场景模拟（测试图表、天文图、带有可选深度图的自定义照片）
+* 3D 设计视图
+* 材质浏览器/编辑器
 
-## Potential Future Considerations
+## 未来可能考虑的功能
 
-* Export standard element drawing PDFs for manufacturing
-* Even-degree polynomial terms added to aspherical surfaces
-* Anti-reflective coatings
-* Tolerances
+* 导出用于制造的标准元素图纸 PDF
+* 添加到非球面曲面的偶数次多项式项
+* 防反射涂层
+* 公差
 
-## Notes
+## 使用说明
 
-### Aspherical Surfaces
+### 非球面表面
 
-Open Optical Designer supports centered, symmetrical, aspherical surfaces of revolution from curves of the form:
+Open Optical Designer 支持从形状曲线旋转出居中、对称的非球面：
 
 $$ z(y) = \frac{y^2}{R + \sqrt{R^2-(K+1)y^2}} $$
 
-defined by the radius of curvature $R$ and the conic constant $K$. The intersection of a ray with
-surfaces defined in this manner is implemented using direct evaluation of the exact solutions for
-the intersection of the surface with a parameterized line. The additional even-degree polynomial terms:
-
+由曲率半径定义 $R$ 和圆锥常数 $K$. 射线与的精确解的直接评估来实现。曲面与参数化直线的交点的精确解。附加的偶数多项式项：
 $$ {A_4}y^4 + {A_6}y^6  + {A_8}y^8 + {A_{10}}y^{10} + \cdots{} $$
 
- used for more complex aspherical surfaces are
-not currently supported because a more complex procedure is required to determine ray intersections in
-the absence of an algebraic solution for the parameter of an intersecting line. The `derivations`
-directory contains artifacts from the process of finding these solutions for reference.
+目前还不支持用于更复杂非球面表面的 "射线交点"，因为在没有相交线参数代数解的情况下，需要更复杂的程序来确定射线交点。 derivations`目录
+目录中包含寻找这些解决方案过程中的 Python 代码，以供参考。
 
-### Units
+### 单位
 
-Design parameters use generic measurement units, but designs generally
-follow a standard such as considering units equivalent to millimeters. Inputs
-and outputs that require specific units (such as the design center wavelength
-in micrometers) are labeled appropriately.
+设计参数使用通用测量单位，但设计通常遵循一种标准，例如考虑将单位定为毫米。
 
-### Formula Syntax and Evaluation
+需要特定单位（如以微米为单位的设计中心波长）的输入和输出会被适当标注。
 
-A surface input field value beginning with an equals sign (`=`) will be interpreted
-as a formula which can include numbers, arithmetic operations, and references to
-the final values of other surface fields.
+### 公式语法和计算
 
-Supported operators: (for arbitrary operands `x` and `y`)
+以等号 （'='） 开头的曲面输入场值将被解释为一个公式，该公式可以包括数字、算术运算和对其他曲面场最终值的引用。
 
-* `x + y`: addition
-* `x - y`: subtraction
-* `x * y`: multiplication
-* `x / y`: division
-* `x ^ y`: exponentiation
-* `(x)`: parentheses
-* `-x`: negation
+支持的运算符：（对于任意操作数 'x' 和 'y'）
 
-Supported surface variables: (where `#` is the 1-based surface index)
+* `x + y`: 加
+* `x - y`: 减
+* `x * y`: 乘
+* `x / y`: 除
+* `x ^ y`: 幂
+* `(x)`: 括号
+* `-x`: 取反
 
-* `RC#`: radius of curvature
-* `AR#`: aperture radius
-* `TH#`: thickness
-* `CC#`: conic constant
+支持的曲面变量：（其中 `#` 是以 1 为单位的曲面索引）
 
-Examples:
+* `RC#`: 曲率半径
+* `AR#`: 光圈半径
+* `TH#`: 厚度
+* `CC#`: 圆锥常数
 
-* To set the aperture radius of surface 2 to automatically update to match the aperture radius of surface 1, enter `=AR1` into the aperture radius field for surface 2.
-* To set the thickness of surface 1 to automatically update to be one quarter of surface 1's radius of curvature, enter `=RC1/4` into the thickness field for surface 1.
+例子:
 
-Note that the dynamic thickness of the final surface is not available for use
-in a formula when the "Last Surface Autofocus" setting in the
-"Environment Control" section is on.
+* 要将表面 2 的光圈半径设置为自动更新以匹配表面 1 的光圈半径，请在表面 2 的光圈半径字段中输入“=AR1”。
+* 要将曲面 1 的厚度设置为自动更新为曲面 1 曲率半径的四分之一，请在曲面 1 的厚度字段中输入“=RC1/4”。
 
-### Saving and Loading Files
+请注意，当 "环境控制 "部分中的 "最后一个表面自动对焦 "设置打开时，公式中将无法使用动态厚度。
 
-The "Save JSON File" button will download the current lens design as a JSON file.
-Depending on your browser settings, this may prompt for a location and name to save
-the file or immediately save the file in your downloads directory with the default name (lens-design.json).
-The "Load JSON File" button can be used to load a lens design that was previously saved
-to a local file. JSON project files contain both the lens design and the environment settings.
+### 保存和加载 JSON 文件
 
-### Importing ".len" Files
+“保存 JSON 文件”按钮会将当前镜头设计下载为 JSON 文件。  
+根据您的浏览器设置，这可能会提示保存文件的位置和名称，或者立即以默认名称（lens-design.json）将文件保存在下载目录中。  
+“加载 JSON 文件”按钮可用于加载之前保存到本地文件的镜头设计。JSON 项目文件包含镜头设计和环境设置。
 
-The ".len" file import feature imports design surfaces and recognizes the following
-surface parameters:
+### 导入 ".len" 文件
 
-* Radius of curvature
-* Aperture radius
-* Thickness
-* Material
-* Conic constant
+.len "文件导入功能可导入设计曲面并识别以下参数
+曲面参数：
 
-## Development
+* 曲率半径
+* 光圈半径
+* 厚度
+* 材料
+* 圆锥常数
 
-### Implemented Using Standard Web Technologies With No External Dependencies
+## 开发
 
-This software does not utilize any external or third-party dependencies,
-fonts, images, packages, or frameworks.
-It is written in plain, modern JavaScript as a single page application
-using standard HTML and CSS with no build, preprocessing, generation, or
-transformation steps. It can be run directly in the browser locally
-without a web server if desired.
+### 使用标准网络技术实现，无外部依赖性
 
-### Unit Tests
+本软件不使用任何外部或第三方依赖项、字体、图像、包或框架。
+它以纯粹的现代 JavaScript 编写，是一个使用标准 HTML 和 CSS 的单页面应用程序，没有构建、预处理、生成或转换步骤。如果需要，它可以直接在本地浏览器中运行，无需网络服务器。
 
-Open `tests/test.html` in a browser to run the unit test suite.
+### 单元测试
 
-## Copyright
+打开 `tests/test.html` 在浏览器中运行单元测试套件。
 
-See COPYRIGHT.txt.
+## 版权
 
-## License
+见 COPYRIGHT.txt.
 
-See LICENSE.txt.
+## 开源许可证
+
+见 LICENSE.txt.

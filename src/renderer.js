@@ -210,7 +210,7 @@ class CenterCanvasRenderer extends Renderer {
         let na_free = design.calculateNumericalAperture(false);
         this.c.font = '24px sans-serif';
         this.c.fillStyle = 'white';
-        let caption = "f = " + focal_length;
+        let caption = "f = " + focal_length + " mm";
         if (focal_length > 0) {
             caption += ", \u0192/" + Math.round(1/(2*na_limited) * 100) / 100;
             caption += " (f/D = " + fnumber + ")";
@@ -230,9 +230,9 @@ class CenterCanvasRenderer extends Renderer {
             this.c.restore();
             this.c.font = '24px sans-serif';
             this.c.fillStyle = 'white';
-            this.c.fillText("Geometric Point Spread Function", 10, 25);
+            this.c.fillText("几何点扩散函数", 10, 25);
             this.c.font = '14px sans-serif';
-            this.c.fillText("parallel beam, 0.2 unit image plane viewport - full field angle spot, half field angle spot, center spot, center PSF)", 10, 25 + 24);
+            this.c.fillText("平行光束，0.2 单位图像平面视口 - 全场角光斑、半场角光斑、中心光斑、中心 PSF)", 10, 25 + 24);
         }
 
         // TODO clean up layout and scaling
@@ -249,10 +249,10 @@ class CenterCanvasRenderer extends Renderer {
             this.c.restore();
             this.c.font = '24px sans-serif';
             this.c.fillStyle = 'white';
-            this.c.fillText("Optical Path Length", 10, 25);
+            this.c.fillText("光路长度", 10, 25);
             this.c.font = '14px sans-serif';
-            this.c.fillText("Top: optical path length relative to center", 10, 25 + 24);
-            this.c.fillText("Bottom: optical phase for monochromatic center wavelength", 10, 25 + 24 + 14);
+            this.c.fillText("顶部：相对于中心的光路长度", 10, 25 + 24);
+            this.c.fillText("底部：单色中心波长的光学相位", 10, 25 + 24 + 14);
         }
 
         if (app.ui.center_pane_view_mode == 'chromatic_aberration') {
@@ -264,7 +264,7 @@ class CenterCanvasRenderer extends Renderer {
             this.c.fillStyle = 'white';
 
             if (result) {
-                this.c.fillText("Axial CA offset from center wavelength optical axis crossing: ", 10, 25);
+                this.c.fillText("中心波长光轴交叉的轴向 CA 偏移： ", 10, 25);
                 let h = 25 + 24;
                 let names = [app.design.short_wavelength, app.design.center_wavelength, app.design.long_wavelength];
                 this.c.font = '24px monospace';
@@ -274,7 +274,7 @@ class CenterCanvasRenderer extends Renderer {
                 }
                 h += 10;
                 this.c.font = '24px sans-serif';
-                this.c.fillText("Transverse CA offset from short wavelength at image plane: ", 10, h);
+                this.c.fillText("图像平面短波长的横向 CA 偏移：", 10, h);
                 h += 24;
                 this.c.font = '24px monospace';
                 for (let i = 0; i < 3; i += 1) {

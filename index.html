@@ -1,177 +1,183 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Open Optical Designer</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="src/math/vector.js"></script>
-        <script src="src/math/matrix.js"></script>
-        <script src="src/math/complex.js"></script>
-        <script src="src/data/material-data.js"></script>
-        <script src="src/data/default-sample-lens.js"></script>
-        <script src="src/material.js"></script>
-        <script src="src/formula.js"></script>
-        <script src="src/surface.js"></script>
-        <script src="src/design.js"></script>
-        <script src="src/renderer.js"></script>
-        <script src="src/ui.js"></script>
-        <script src="src/main.js"></script>
-    </head>
-    <body>
-        <div id="app-container">
-            <div id="app-top-pane">
-                <div style="display: flex; align-items: center;">
-                    <div id="top-pane-title">
-                        <a href="https://github.com/alexbock/open-optical-designer">
-                            Open Optical Designer
-                        </a>
-                    </div>
-                    <div class="flex-expand"></div>
-                    <div class="top-pane-button" id="btn-new">
-                        New Lens Design
-                    </div>
-                    <div class="top-pane-button">
-                        <label for="btn-load-json-file">Load JSON file</label>
-                        <input type="file" id="btn-load-json-file" style="display: none;">
-                    </div>
-                    <div class="top-pane-button" id="btn-save-json-file">
-                        Save JSON file
-                    </div>
-                    <div class="top-pane-button">
-                        <label for="btn-import-len-file">Import <tt>.len</tt> file</label>
-                        <input type="file" id="btn-import-len-file" style="display: none;">
-                    </div>
+
+<head>
+    <meta charset="utf-8">
+    <title>Open Optical Designer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="src/math/vector.js"></script>
+    <script src="src/math/matrix.js"></script>
+    <script src="src/math/complex.js"></script>
+    <script src="src/data/material-data.js"></script>
+    <script src="src/data/default-sample-lens.js"></script>
+    <script src="src/material.js"></script>
+    <script src="src/formula.js"></script>
+    <script src="src/surface.js"></script>
+    <script src="src/design.js"></script>
+    <script src="src/renderer.js"></script>
+    <script src="src/ui.js"></script>
+    <script src="src/main.js"></script>
+</head>
+
+<body>
+    <div id="app-container">
+        <div id="app-top-pane">
+            <div style="display: flex; align-items: center;">
+                <div id="top-pane-title">
+                    <a href="https://github.com/alexbock/open-optical-designer">
+                        Open Optical Designer
+                    </a>
                 </div>
-            </div>
-            <div id="app-main-row">
-                <div id="app-left-pane">
-                    <div id="surface-editor-section" class="section">
-                        <div id="surface-table-controls">
-                            <div id="surface-table-section-title" class="section-title">
-                                Surface Editor
-                            </div>
-                            <div class="flex-expand"></div>
-                            <div id="surface-table-add-after-button" class="surface-table-controls-button surface-table-controls-button-add" title="Add new surface after selection">
-                                <div>&roplus;&darr;</div>
-                            </div>
-                            <div id="surface-table-add-before-button" class="surface-table-controls-button surface-table-controls-button-add" title="Add new surface before selection">
-                                <div>&roplus;&uarr;</div>
-                            </div>
-                            <div id="surface-table-delete-button" class="surface-table-controls-button surface-table-controls-button-remove" title="Delete selected surface">
-                                <div>&rotimes;</div>
-                            </div>
-                        </div>
-                        <table id="surface-table" class="edit-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Radius of Curvature</th>
-                                    <th>Aperture Radius</th>
-                                    <th>Thickness</th>
-                                    <th>Material</th>
-                                </tr>
-                            </thead>
-                            <tbody id="surface-table-body">
-                                <!-- Begin Table Sample Content -->
-                                <tr>
-                                    <td>1</td>
-                                    <td><input type="text" value="100"></td>
-                                    <td><input type="text" value="25"></td>
-                                    <td><input type="text" value="10"></td>
-                                    <td>PMMA</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><input type="text" value="0"></td>
-                                    <td><input type="text" value="25"></td>
-                                    <td><input type="text" value="10"></td>
-                                    <td>Air</td>
-                                </tr>
-                                <!-- End Table Sample Content -->
-                            </tbody>
-                        </table>
-                        <br>
-                        <div class="section-title">
-                            Details for Surface <span id="surface-detail-selected-number">1</span>
-                        </div>
-                        <table id="surface-detail-table" class="edit-table">
-                            <tbody id="surface-detail-table-body">
-                                <!-- Begin Table Sample Content -->
-                                <tr>
-                                    <td>Conic Constant</td>
-                                    <td>
-                                        <input type="text" value="0" size="6" style="font-size: inherit; text-align: center;">
-                                    </td>
-                                    <td>(Spherical)</td>
-                                </tr>
-                                <!-- End Table Sample Content -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr class="section-separator">
-                    <div class="section">
-                        <div class="section-title">
-                            Environment Control
-                        </div>
-                        <table id="env-control-table" class="edit-table">
-                            <tbody id="env-control-table-body">
-                                <!-- Begin Table Sample Content -->
-                                <tr>
-                                    <td>Input Beam Radius</td>
-                                    <td>
-                                        <input type="text" value="0" size="6" style="font-size: inherit; text-align: center;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Input FOV Angle</td>
-                                    <td>
-                                        <input type="text" value="0" size="6" style="font-size: inherit; text-align: center;">
-                                    </td>
-                                </tr>
-                                <!-- End Table Sample Content -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr class="section-separator">
-                    <div class="section" style="width: 55ch; font-size: 80%; font-family: monospace;">
-Open Optical Designer - Free Lens Design Software
-<br>
-Copyright (C) 2022-2023 Alexander Bock
-<br>
-<a href="https://github.com/alexbock/open-optical-designer">
-    View Source Code on GitHub
-</a>
-<br>
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License version 3
-as published by the Free Software Foundation and included in this
-repository.
-<br>
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-                    </div>
+                <div class="flex-expand"></div>
+                <div class="top-pane-button" id="btn-new">
+                    新的镜头设计
                 </div>
-                <div id="app-center-pane">
-                    <div id="center-pane-control-bar">
-                        <div>
-                            <select id="select-center-view">
-                                <option value="design2d">2D Cross Section</option>
-                                <option value="ray_aberration">Ray Aberration</option>
-                                <option value="geo_psf">Point Spread Function</option>
-                                <option value="chromatic_aberration">Chromatic Aberration</option>
-                                <option value="opl">Optical Path Length</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="main-canvas-container">
-                        <canvas id="main-canvas" width="800" height="600">
-                            Your browser does not support the &lt;canvas&gt; element.
-                        </canvas>
-                    </div>
+                <div class="top-pane-button">
+                    <label for="btn-load-json-file">加载 JSON 文件</label>
+                    <input type="file" id="btn-load-json-file" style="display: none;">
+                </div>
+                <div class="top-pane-button" id="btn-save-json-file">
+                    保存 JSON 文件
+                </div>
+                <div class="top-pane-button">
+                    <label for="btn-import-len-file">导入 <tt>.len</tt> 文件</label>
+                    <input type="file" id="btn-import-len-file" style="display: none;">
                 </div>
             </div>
         </div>
-    </body>
+        <div id="app-main-row">
+            <div id="app-left-pane">
+                <div id="surface-editor-section" class="section">
+                    <div id="surface-table-controls">
+                        <div id="surface-table-section-title" class="section-title">
+                            面编辑器
+                        </div>
+                        <div class="flex-expand"></div>
+                        <div id="surface-table-add-after-button"
+                            class="surface-table-controls-button surface-table-controls-button-add"
+                            title="选取后添加新表面">
+                            <div>&roplus;&darr;</div>
+                        </div>
+                        <div id="surface-table-add-before-button"
+                            class="surface-table-controls-button surface-table-controls-button-add"
+                            title="在选择之前添加新表面">
+                            <div>&roplus;&uarr;</div>
+                        </div>
+                        <div id="surface-table-delete-button"
+                            class="surface-table-controls-button surface-table-controls-button-remove"
+                            title="删除选定表面">
+                            <div>&rotimes;</div>
+                        </div>
+                    </div>
+                    <table id="surface-table" class="edit-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>曲率半径(mm)</th>
+                                <th>光圈半径(mm)</th>
+                                <th>厚度(mm)</th>
+                                <th>材料</th>
+                            </tr>
+                        </thead>
+                        <tbody id="surface-table-body">
+                            <!-- Begin Table Sample Content -->
+                            <tr>
+                                <td>1</td>
+                                <td><input type="text" value="100"></td>
+                                <td><input type="text" value="25"></td>
+                                <td><input type="text" value="10"></td>
+                                <td>PMMA</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><input type="text" value="0"></td>
+                                <td><input type="text" value="25"></td>
+                                <td><input type="text" value="10"></td>
+                                <td>Air</td>
+                            </tr>
+                            <!-- End Table Sample Content -->
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="section-title">
+                        表面的详细信息 <span id="surface-detail-selected-number">1</span>
+                    </div>
+                    <table id="surface-detail-table" class="edit-table">
+                        <tbody id="surface-detail-table-body">
+                            <!-- Begin Table Sample Content -->
+                            <tr>
+                                <td>Conic Constant</td>
+                                <td>
+                                    <input type="text" value="0" size="6"
+                                        style="font-size: inherit; text-align: center;">
+                                </td>
+                                <td>(球形)</td>
+                            </tr>
+                            <!-- End Table Sample Content -->
+                        </tbody>
+                    </table>
+                </div>
+                <hr class="section-separator">
+                <div class="section">
+                    <div class="section-title">
+                        环境控制
+                    </div>
+                    <table id="env-control-table" class="edit-table">
+                        <tbody id="env-control-table-body">
+                            <!-- Begin Table Sample Content -->
+                            <tr>
+                                <td>Input Beam Radius</td>
+                                <td>
+                                    <input type="text" value="0" size="6"
+                                        style="font-size: inherit; text-align: center;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Input FOV Angle</td>
+                                <td>
+                                    <input type="text" value="0" size="6"
+                                        style="font-size: inherit; text-align: center;">
+                                </td>
+                            </tr>
+                            <!-- End Table Sample Content -->
+                        </tbody>
+                    </table>
+                </div>
+                <hr class="section-separator">
+                <div class="section" style="width: 55ch; font-size: 80%; font-family: monospace;">
+                    Open Optical Designer - 免费镜头设计软件
+                    <br>
+                    Copyright (C) 2022-2023 Alexander Bock
+                    <br>
+                    <a href="https://github.com/alexbock/open-optical-designer">
+                        在 GitHub 上查看源代码
+                    </a>
+                    <br>
+                    本程序是自由软件：您可以根据自由软件基金会发布的 GNU Affero 通用公共许可证第 3 版的条款重新发布和/或修改本程序，开源许可证已包含在本软件库中。
+                    <br>
+                    发布本程序的目的是希望其有用，但不附带任何保证；甚至不附带适销性或特定用途适用性的默示保证。更多详情，请参阅 GNU Affero 通用公共许可证。
+                </div>
+            </div>
+            <div id="app-center-pane">
+                <div id="center-pane-control-bar">
+                    <div>
+                        <select id="select-center-view">
+                            <option value="design2d">二维横截面</option>
+                            <option value="ray_aberration">光线像差</option>
+                            <option value="geo_psf">点扩散函数</option>
+                            <option value="chromatic_aberration">色差</option>
+                            <option value="opl">光路长度</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="main-canvas-container">
+                    <canvas id="main-canvas" width="800" height="600">
+                        您的浏览器不支持 &lt;canvas&gt; 组件.
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

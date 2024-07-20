@@ -33,7 +33,7 @@ class UI {
                     formula_property.formula = new Formula(input.value.substring(1));
                 } catch (e) {
                     if (e instanceof FormulaError) {
-                        e.showErrorAlert("Error parsing formula", formula_property);
+                        e.showErrorAlert("公式解析错误", formula_property);
                         formula_property.formula = null;
                         surface[field] = 0;
                     } else {
@@ -145,7 +145,7 @@ class UI {
         let cc = this.createDOMSurfaceTableTextInput(selected_surface, 'conic_constant', true);
         let row = document.createElement("tr");
         let cc_label = document.createElement("td");
-        let cc_label_text = document.createTextNode("Conic Constant");
+        let cc_label_text = document.createTextNode("圆锥系数");
         cc_label.appendChild(cc_label_text);
         row.appendChild(cc_label);
         row.appendChild(cc);
@@ -193,7 +193,7 @@ class UI {
 
         let beam_radius_row = document.createElement("tr");
         let beam_radius_label = document.createElement("td");
-        let beam_radius_label_text = document.createTextNode("Input Beam Radius");
+        let beam_radius_label_text = document.createTextNode("输入光束半径");
         beam_radius_label.appendChild(beam_radius_label_text);
         beam_radius_row.appendChild(beam_radius_label);
         let beam_radius_input = this.createDOMEnvironmentControlTextInput('env_beam_radius');
@@ -202,7 +202,7 @@ class UI {
 
         let beam_fov_row = document.createElement("tr");
         let beam_fov_label = document.createElement("td");
-        let beam_fov_label_text = document.createTextNode("Input FOV Angle");
+        let beam_fov_label_text = document.createTextNode("输入 视场角 角度");
         beam_fov_label.appendChild(beam_fov_label_text);
         beam_fov_row.appendChild(beam_fov_label);
         let beam_fov_input = this.createDOMEnvironmentControlTextInput('env_fov_angle');
@@ -211,7 +211,7 @@ class UI {
 
         let beam_rays_row = document.createElement("tr");
         let beam_rays_label = document.createElement("td");
-        let beam_rays_label_text = document.createTextNode("Rays per Beam");
+        let beam_rays_label_text = document.createTextNode("每光束光线数");
         beam_rays_label.appendChild(beam_rays_label_text);
         beam_rays_row.appendChild(beam_rays_label);
         let beam_rays_input = this.createDOMEnvironmentControlTextInput('env_rays_per_beam');
@@ -220,7 +220,7 @@ class UI {
 
         let sym_beams_row = document.createElement("tr");
         let sym_beams_label = document.createElement("td");
-        let sym_beams_label_text = document.createTextNode("Mirror Angled Beams");
+        let sym_beams_label_text = document.createTextNode("镜面斜角光束");
         sym_beams_label.appendChild(sym_beams_label_text);
         sym_beams_row.appendChild(sym_beams_label);
         let sym_beams_input_td = document.createElement("td");
@@ -238,7 +238,7 @@ class UI {
 
         let beam_cross_dist_row = document.createElement("tr");
         let beam_cross_dist_label = document.createElement("td");
-        let beam_cross_dist_label_text = document.createTextNode("Aperture Distance");
+        let beam_cross_dist_label_text = document.createTextNode("光源距离");
         beam_cross_dist_label.appendChild(beam_cross_dist_label_text);
         beam_cross_dist_row.appendChild(beam_cross_dist_label);
         let beam_cross_dist_input = this.createDOMEnvironmentControlTextInput('env_beam_cross_distance');
@@ -247,7 +247,7 @@ class UI {
 
         let cwl_row = document.createElement("tr");
         let cwl_label = document.createElement("td");
-        let cwl_label_text = document.createTextNode("Center Wavelength");
+        let cwl_label_text = document.createTextNode("中心波长");
         cwl_label.appendChild(cwl_label_text);
         cwl_row.appendChild(cwl_label);
         let cwl_input = this.createDOMEnvironmentControlTextInput('center_wavelength');
@@ -258,7 +258,7 @@ class UI {
 
         let img_radius_row = document.createElement("tr");
         let img_radius_label = document.createElement("td");
-        let img_radius_label_text = document.createTextNode("Image Plane Radius");
+        let img_radius_label_text = document.createTextNode("像平面半径");
         img_radius_label.appendChild(img_radius_label_text);
         img_radius_row.appendChild(img_radius_label);
         let img_radius_input = this.createDOMEnvironmentControlTextInput('env_image_radius');
@@ -268,12 +268,12 @@ class UI {
         let last_surface_autofocus_choices = [
             ["off", "Off"],
             //["paraxial_matrix", "Paraxial Matrix"],
-            ["paraxial_ray", "Paraxial Ray"],
-            ["marginal_ray", "Marginal Ray"],
+            ["paraxial_ray", "旁轴射线"],
+            ["marginal_ray", "边缘射线"],
         ];
         let last_surface_autofocus_row = document.createElement("tr");
         let last_surface_autofocus_label = document.createElement("td");
-        let last_surface_autofocus_label_text = document.createTextNode("Last Surface Autofocus");
+        let last_surface_autofocus_label_text = document.createTextNode("自动确定最后表面位置");
         last_surface_autofocus_label.appendChild(last_surface_autofocus_label_text);
         last_surface_autofocus_row.appendChild(last_surface_autofocus_label);
         let last_surface_autofocus_select_td = document.createElement("td");
@@ -299,7 +299,7 @@ class UI {
 
         let focus_dots_row = document.createElement("tr");
         let focus_dots_label = document.createElement("td");
-        let focus_dots_label_text = document.createTextNode("Show Focal Dots");
+        let focus_dots_label_text = document.createTextNode("显示焦点");
         focus_dots_label.appendChild(focus_dots_label_text);
         focus_dots_row.appendChild(focus_dots_label);
         let focus_dots_input_td = document.createElement("td");
