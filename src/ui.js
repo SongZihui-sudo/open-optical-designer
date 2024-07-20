@@ -314,6 +314,33 @@ class UI {
         focus_dots_input_td.appendChild(focus_dots_input_check);
         focus_dots_row.appendChild(focus_dots_input_td);
         tbody.appendChild(focus_dots_row);
+
+        let optical_center_dots_row = document.createElement("tr");
+        let optical_center_dots_label = document.createElement("td");
+        let optical_center_dots_label_text = document.createTextNode("显示光心");
+        optical_center_dots_label.appendChild(optical_center_dots_label_text);
+        optical_center_dots_row.appendChild(optical_center_dots_label);
+        let optical_center_dots_input_td = document.createElement("td");
+        let optical_center_dots_input_check = document.createElement("input");
+        optical_center_dots_input_check.type = "checkbox";
+        optical_center_dots_input_check.style = "margin-left: 2.5em;"
+        optical_center_dots_input_check.checked = app.design.env_optical_center_dots;
+        optical_center_dots_input_check.addEventListener('change', (event) => {
+            app.design.env_optical_center_dots = optical_center_dots_input_check.checked;
+            app.renderer.paint(app.design);
+        });
+        optical_center_dots_input_td.appendChild(optical_center_dots_input_check);
+        optical_center_dots_row.appendChild(optical_center_dots_input_td);
+        tbody.appendChild(optical_center_dots_row);
+
+        let flange_dist_row = document.createElement("tr");
+        let flange_dist_label = document.createElement("td");
+        let flange_dist_label_text = document.createTextNode("法兰距");
+        flange_dist_label.appendChild(flange_dist_label_text);
+        flange_dist_row.appendChild(flange_dist_label);
+        let flange_dist_input = this.createDOMEnvironmentControlTextInput("env_flange_dist");;
+        flange_dist_row.appendChild(flange_dist_input);
+        tbody.appendChild(flange_dist_row);
     }
 
     surfaceTableAddRowAfter() {

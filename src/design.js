@@ -15,6 +15,8 @@ class Design {
         this.env_initial_material = AIR_MATERIAL;
         this.env_last_surface_autofocus = "off";
         this.env_marginal_vs_paraxial_focus_dots = true;
+        this.env_flange_dist = 46.5
+        this.env_optical_center_dots = true
     }
 
     static async importLenFile(e) {
