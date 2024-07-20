@@ -190,25 +190,28 @@ class UI {
     writeDOMEnvironmentControl() {
         let tbody = document.getElementById("env-control-table-body");
         tbody.innerHTML = "";
-
+        
+        // 光束半径
         let beam_radius_row = document.createElement("tr");
         let beam_radius_label = document.createElement("td");
-        let beam_radius_label_text = document.createTextNode("输入光束半径");
+        let beam_radius_label_text = document.createTextNode("光束半径");
         beam_radius_label.appendChild(beam_radius_label_text);
         beam_radius_row.appendChild(beam_radius_label);
         let beam_radius_input = this.createDOMEnvironmentControlTextInput('env_beam_radius');
         beam_radius_row.appendChild(beam_radius_input);
         tbody.appendChild(beam_radius_row);
-
+        
+        // 视场角角度
         let beam_fov_row = document.createElement("tr");
         let beam_fov_label = document.createElement("td");
-        let beam_fov_label_text = document.createTextNode("输入 视场角 角度");
+        let beam_fov_label_text = document.createTextNode("视场角角度");
         beam_fov_label.appendChild(beam_fov_label_text);
         beam_fov_row.appendChild(beam_fov_label);
         let beam_fov_input = this.createDOMEnvironmentControlTextInput('env_fov_angle');
         beam_fov_row.appendChild(beam_fov_input);
         tbody.appendChild(beam_fov_row);
-
+        
+        // 每光束光线数
         let beam_rays_row = document.createElement("tr");
         let beam_rays_label = document.createElement("td");
         let beam_rays_label_text = document.createTextNode("每光束光线数");
@@ -218,6 +221,7 @@ class UI {
         beam_rays_row.appendChild(beam_rays_input);
         tbody.appendChild(beam_rays_row);
 
+        // 镜面斜角光束
         let sym_beams_row = document.createElement("tr");
         let sym_beams_label = document.createElement("td");
         let sym_beams_label_text = document.createTextNode("镜面斜角光束");
@@ -236,6 +240,7 @@ class UI {
         sym_beams_row.appendChild(sym_beams_input_td);
         tbody.appendChild(sym_beams_row);
 
+        // 光源距离
         let beam_cross_dist_row = document.createElement("tr");
         let beam_cross_dist_label = document.createElement("td");
         let beam_cross_dist_label_text = document.createTextNode("光源距离");
@@ -245,6 +250,7 @@ class UI {
         beam_cross_dist_row.appendChild(beam_cross_dist_input);
         tbody.appendChild(beam_cross_dist_row);
 
+        // 中心波长
         let cwl_row = document.createElement("tr");
         let cwl_label = document.createElement("td");
         let cwl_label_text = document.createTextNode("中心波长");
@@ -256,6 +262,7 @@ class UI {
         cwl_input.appendChild(cwl_units_label_text);
         tbody.appendChild(cwl_row);
 
+        // 像平面半径
         let img_radius_row = document.createElement("tr");
         let img_radius_label = document.createElement("td");
         let img_radius_label_text = document.createTextNode("像平面半径");
@@ -297,6 +304,7 @@ class UI {
         last_surface_autofocus_row.appendChild(last_surface_autofocus_select_td);
         tbody.appendChild(last_surface_autofocus_row);
 
+        // 显示焦点
         let focus_dots_row = document.createElement("tr");
         let focus_dots_label = document.createElement("td");
         let focus_dots_label_text = document.createTextNode("显示焦点");
@@ -315,6 +323,7 @@ class UI {
         focus_dots_row.appendChild(focus_dots_input_td);
         tbody.appendChild(focus_dots_row);
 
+        // 显示光心
         let optical_center_dots_row = document.createElement("tr");
         let optical_center_dots_label = document.createElement("td");
         let optical_center_dots_label_text = document.createTextNode("显示光心");
@@ -333,12 +342,13 @@ class UI {
         optical_center_dots_row.appendChild(optical_center_dots_input_td);
         tbody.appendChild(optical_center_dots_row);
 
+        // 法兰距
         let flange_dist_row = document.createElement("tr");
         let flange_dist_label = document.createElement("td");
         let flange_dist_label_text = document.createTextNode("法兰距");
         flange_dist_label.appendChild(flange_dist_label_text);
         flange_dist_row.appendChild(flange_dist_label);
-        let flange_dist_input = this.createDOMEnvironmentControlTextInput("env_flange_dist");;
+        let flange_dist_input = this.createDOMEnvironmentControlTextInput("env_flange_dist");
         flange_dist_row.appendChild(flange_dist_input);
         tbody.appendChild(flange_dist_row);
     }

@@ -198,13 +198,33 @@ class CenterCanvasRenderer extends Renderer {
         this.c.lineTo(user_image_distance, design.env_image_radius);
         this.c.stroke();
 
-        this.c.restore();
-
-        // write system focal length
+        // 计算焦距
         let matrix = design.calculateMeyerArendtSystemMatrix();
         let focal_length = 1 / matrix[1];
         let fnumber = focal_length/(design.surfaces[0].aperture_radius*2);
         focal_length = Math.round(focal_length * 100) / 100;
+
+        // draw optical_center
+        if (app.design.env_optical_center_dots) {
+            this.c.strokeStyle = "yellow";
+            this.c.lineWidth = "0.5";
+            this.c.beginPath();
+            this.c.moveTo(user_image_distance - focal_length, -design.env_image_radius);
+            this.c.lineTo(user_image_distance - focal_length, design.env_image_radius);
+            this.c.stroke();
+        }
+
+        // draw flange
+        this.c.strokeStyle = "red";
+        this.c.lineWidth = "0.5";
+        this.c.beginPath();
+        this.c.moveTo(user_image_distance - app.design.env_flange_dist, -design.env_image_radius * 0.8);
+        this.c.lineTo(user_image_distance - app.design.env_flange_dist, design.env_image_radius * 0.8);
+        this.c.stroke();
+
+        this.c.restore();
+
+        // write system focal length
         fnumber = Math.round(fnumber * 100) / 100;
         let na_limited = design.calculateNumericalAperture(true);
         let na_free = design.calculateNumericalAperture(false);
@@ -282,7 +302,7 @@ class CenterCanvasRenderer extends Renderer {
                     h += 24;
                 }
             } else {
-                this.c.fillText("Beam radius is out of bounds", 10, 25);
+                this.c.fillText("光束半径超出范围", 10, 25);
             }
         }
 
