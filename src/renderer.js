@@ -60,7 +60,7 @@ class CenterCanvasRenderer extends Renderer {
     paintGeometricPointSpreadFunction(design, angle, grid_pos, additive) {
         this.c.save();
         let psf = design.traceGeometricPointSpreadFunction(angle, additive);
-        const voffset = 60;
+        const voffset = 80;
         const h = this.canvas.offsetHeight - voffset;
         const scale = Math.min(this.canvas.offsetWidth / 2, h / 2) / psf[0];
         this.c.translate((this.canvas.offsetWidth / 4 - psf[0] * scale / 2 + grid_pos[0] * this.canvas.offsetWidth / 2), (h / 4 - psf[0] * scale / 2 + grid_pos[1] * h / 2 + voffset));
@@ -71,7 +71,7 @@ class CenterCanvasRenderer extends Renderer {
                 if (intensity < 0 || intensity > 1) {
                     throw "PSF intensity out of range";
                 }
-                this.c.fillStyle = "rgb(255,255,255," + Math.min(1, intensity * 1) + ")";
+                this.c.fillStyle = "rgb(0,0,0," + Math.min(1, intensity * 1) + ")";
                 //this.c.beginPath();
                 //this.c.arc(x*1 , y*1, 1, 0, Math.PI*2);
                 //this.c.fill();
@@ -109,7 +109,7 @@ class CenterCanvasRenderer extends Renderer {
         this.c.translate(system_width * 0.10, this.canvas.offsetHeight/2/img_scale);
 
         // draw surfaces
-        this.c.strokeStyle = 'white';
+        this.c.strokeStyle = 'black';
         this.c.lineWidth='0.3';
         let t = 0;
         let last_edges = null;
@@ -229,7 +229,7 @@ class CenterCanvasRenderer extends Renderer {
         let na_limited = design.calculateNumericalAperture(true);
         let na_free = design.calculateNumericalAperture(false);
         this.c.font = '24px sans-serif';
-        this.c.fillStyle = 'white';
+        this.c.fillStyle = 'black';
         let caption = "f = " + focal_length + " mm";
         if (focal_length > 0) {
             caption += ", \u0192/" + Math.round(1/(2*na_limited) * 100) / 100;
@@ -249,7 +249,7 @@ class CenterCanvasRenderer extends Renderer {
             this.paintGeometricPointSpreadFunction(design, design.env_fov_angle, [0, 0]);
             this.c.restore();
             this.c.font = '24px sans-serif';
-            this.c.fillStyle = 'white';
+            this.c.fillStyle = 'black';
             this.c.fillText("几何点扩散函数", 10, 25);
             this.c.font = '14px sans-serif';
             this.c.fillText("平行光束，0.2 单位图像平面视口 - 全场角光斑、半场角光斑、中心光斑、中心 PSF)", 10, 25 + 24);
@@ -268,7 +268,7 @@ class CenterCanvasRenderer extends Renderer {
             app.design.plotOpticalPathLengthBeforeImagePlane(undefined, true);
             this.c.restore();
             this.c.font = '24px sans-serif';
-            this.c.fillStyle = 'white';
+            this.c.fillStyle = 'black';
             this.c.fillText("光路长度", 10, 25);
             this.c.font = '14px sans-serif';
             this.c.fillText("顶部：相对于中心的光路长度", 10, 25 + 24);
@@ -281,7 +281,7 @@ class CenterCanvasRenderer extends Renderer {
             this.c.fillStyle = bg_color;
             this.c.fillRect(0, 0, this.canvas.offsetWidth+10, this.canvas.offsetHeight+10);
             this.c.font = '24px sans-serif';
-            this.c.fillStyle = 'white';
+            this.c.fillStyle = 'black';
 
             if (result) {
                 this.c.fillText("中心波长光轴交叉的轴向 CA 偏移： ", 10, 25);
@@ -321,14 +321,14 @@ class CenterCanvasRenderer extends Renderer {
         let result = design.calculateRayAberrations(angle * (2 * Math.PI / 360));
 
         this.c.lineWidth = 1;
-        this.c.strokeStyle = 'white';
+        this.c.strokeStyle = 'black';
         this.c.strokeRect(x, y, w, h);
         x += 2;
         y += 2;
         w -= 4;
         h -= 4;
 
-        this.c.fillStyle = 'white';
+        this.c.fillStyle = 'black';
         let max_aperture = 0;
         let max_image = 0;
         let min_image = Infinity;
@@ -352,12 +352,10 @@ class CenterCanvasRenderer extends Renderer {
             this.c.fill();
         }
 
-        this.c.font = '24px monospace';
-        this.c.fillStyle = 'white';
-        this.c.strokeStyle = 'black';
+        this.c.font = '26px monospace';
+        this.c.fillStyle = 'black';
         let measure_aperture = this.c.measureText(angle + "\u00B0");
         this.c.lineWidth = 5;
-        this.c.strokeText(angle + "\u00B0", x + w/2 - measure_aperture.width/2, y + h - measure_aperture.actualBoundingBoxAscent/2);
         this.c.fillText(angle + "\u00B0", x + w/2 - measure_aperture.width/2, y + h - measure_aperture.actualBoundingBoxAscent/2);
     }
 }

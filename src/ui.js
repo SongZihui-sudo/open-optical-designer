@@ -221,10 +221,10 @@ class UI {
         beam_rays_row.appendChild(beam_rays_input);
         tbody.appendChild(beam_rays_row);
 
-        // 镜面斜角光束
+        // 镜面方向光束
         let sym_beams_row = document.createElement("tr");
         let sym_beams_label = document.createElement("td");
-        let sym_beams_label_text = document.createTextNode("镜面斜角光束");
+        let sym_beams_label_text = document.createTextNode("镜面方向光束");
         sym_beams_label.appendChild(sym_beams_label_text);
         sym_beams_row.appendChild(sym_beams_label);
         let sym_beams_input_td = document.createElement("td");

@@ -1,8 +1,8 @@
 :root {
-    --window-bg-color: lightgray;
-    --window-bg-secondary-color: darkgray;
+    --window-bg-color: rgb(173, 213, 216);
+    --window-bg-secondary-color: rgb(121, 228, 255);
     --table-bg-color: white;
-    --cross-section-viewport-bg-color: rgb(37, 60, 66);
+    --cross-section-viewport-bg-color: rgb(255, 255, 255);
 }
 
 body {
