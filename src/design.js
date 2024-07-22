@@ -586,7 +586,7 @@ class Design {
                     property.is_updating = false;
                 }
             }
-        }
+        }//NS1.DNSOWL.COM
         for (let surface of this.surfaces) {
             for (let property of surface.formula_properties) {
                 if (property.formula) {
